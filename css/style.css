@@ -1,0 +1,184 @@
+        /* Custom CSS for basic styling and collapsible sections */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray background - keeping neutral background */
+            color: #334155; /* Darker text */
+        }
+        /* Sticky header for navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        /* Style for collapsible buttons */
+        .collapsible {
+            background-color: rgba(244, 196, 22, 0.1); /* Light yellow with transparency */
+            color: #334155;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.125rem; /* Equivalent to text-lg */
+            transition: background-color 0.4s ease;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 1rem; /* mt-4 */
+            font-weight: 500; /* font-medium */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .collapsible:hover {
+            background-color: rgba(244, 196, 22, 0.25); /* Slightly more yellow on hover */
+        }
+        .collapsible.active {
+            background-color: #F4C416; /* Solid yellow when active */
+            color: #89181A; /* Dark red text on active yellow */
+        }
+        .collapsible .arrow {
+            transition: transform 0.2s ease-in-out;
+            color: #89181A; /* Dark red arrow */
+        }
+        .collapsible.active .arrow {
+            transform: rotate(90deg);
+            color: #89181A; /* Dark red arrow on active yellow */
+        }
+        /* Content area for collapsible sections */
+        .content {
+            padding: 0 1.5rem; /* px-6 */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #ffffff; /* White background for content */
+            border-left: 4px solid #F4C416; /* Yellow border */
+            margin-left: 0.5rem; /* ml-2 */
+            border-radius: 0 0 0.5rem 0.5rem; /* rounded-b-lg */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
+        }
+        .content p, .content .media-placeholder {
+            padding-top: 1rem; /* pt-4 */
+        }
+        .content ul {
+            list-style: disc;
+            margin-left: 1.5rem; /* ml-6 */
+            padding-bottom: 1rem; /* pb-4 */
+        }
+        /* Placeholder for embedded media */
+        .media-placeholder {
+            background-color: rgba(137, 24, 26, 0.05); /* Very light red background */
+            border: 1px dashed #89181A; /* Dashed red border */
+            padding: 2rem; /* p-8 */
+            text-align: center;
+            margin: 1.5rem 0; /* my-6 */
+            min-height: 10rem; /* min-h-40 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b; /* Gray text */
+            font-style: italic;
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+        .media-placeholder iframe,
+        .media-placeholder img,
+        .media-placeholder video {
+            max-width: 100%; /* Ensure embedded content is responsive */
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Styles for the new image gallery with hover description */
+        .image-gallery-item {
+            position: relative;
+            overflow: hidden; /* Hide overflow content for description */
+            border-radius: 0.5rem; /* Apply rounded corners */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+            cursor: pointer;
+        }
+        .image-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure images cover the area */
+            display: block;
+            transition: transform 0.3s ease-in-out; /* Smooth scale on hover */
+        }
+        .image-gallery-item:hover img {
+            transform: scale(1.05); /* Slightly enlarge image on hover */
+        }
+        .image-description {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(137, 24, 26, 0.9); /* Dark red semi-transparent background */
+            color: white;
+            padding: 0.75rem; /* p-3 */
+            transform: translateY(100%); /* Start hidden at the bottom */
+            transition: transform 0.3s ease-in-out; /* Smooth slide-up transition */
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.4;
+        }
+        .image-gallery-item:hover .image-description {
+            transform: translateY(0); /* Slide up to show */
+            opacity: 1;
+        }
+        .image-description strong {
+            font-weight: 600; /* semi-bold */
+            margin-bottom: 0.25rem; /* mb-1 */
+        }
+
+
+        /* Responsive adjustments for header and navigation */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem; /* p-4 */
+            }
+            header .title {
+                font-size: 1.875rem; /* text-3xl */
+            }
+            nav a {
+                padding: 0.5rem 0.75rem; /* py-2 px-3 */
+                margin: 0 0.25rem; /* mx-1 */
+                font-size: 0.875rem; /* text-sm */
+            }
+            /* Adjust gallery for smaller screens: 2 columns on tablets */
+            .image-gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .image-gallery-item {
+                height: 180px; /* Fixed height for small screen images to prevent squishing */
+            }
+        }
+        @media (max-width: 480px) {
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-center;
+            }
+            nav a {
+                flex-basis: 45%; /* Two links per row */
+                margin: 0.25rem; /* m-1 */
+                text-align: center;
+            }
+            /* Adjust gallery for extra small screens: 1 column on phones */
+            .image-gallery-grid {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+            .image-gallery-item {
+                height: 220px; /* Slightly larger fixed height for single column */
+            }
+        }
+        /* Custom adjustment for the image gallery for 3 columns on larger screens */
+        @media (min-width: 1024px) { /* Equivalent to lg breakpoint */
+            .image-gallery-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns on large screens */
+            }
+        }
